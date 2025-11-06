@@ -37,7 +37,7 @@ export default function RootLayout({
               <Link href="/" className="hover:underline">Inicio</Link>
               <Link href="/nosotros" className="hover:underline">Nosotros</Link>
               <Link href="/programas" className="hover:underline">Programas</Link>
-              <Link href="/donar" className="hover:underline font-semibold">Donar</Link>
+             {/*  <Link href="/donar" className="hover:underline font-semibold">Donar</Link> */}
               <Link href="/contacto" className="hover:underline">Contacto</Link>
             </nav>
           </div>

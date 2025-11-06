@@ -1,16 +1,43 @@
-import { NextResponse } from "next/server";
+// src/app/api/checkout/route.ts
+/* import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+ */
+/* const stripeSecret = process.env.STRIPE_SECRET_KEY;
+if (!stripeSecret) {
+  
+  throw new Error("STRIPE_SECRET_KEY is not set");
+}
+ */
+// No pases apiVersion si te dio error antes: Stripe usa la del dashboard.
+// Si quieres fijarla, usa una literal válida, por ejemplo: '2024-06-20'.
+/* const stripe = new Stripe(stripeSecret);
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
-export async function POST(req: Request) {
+type CheckoutBody = {
+  amount: number;             
+  currency?: string;          
+  email?: string;             
+};
+ */
+/* export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { amount = 500, currency = "usd", email } = body;
+    
+    const body = (await req.json()) as CheckoutBody;
+
+    const amount = Number(body.amount);
+    const currency = (body.currency ?? "usd").toLowerCase();
+    const email = body.email;
+
+    if (!Number.isFinite(amount) || amount <= 0) {
+      return NextResponse.json(
+        { error: "Invalid amount" },
+        { status: 400 }
+      );
+    }
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
       mode: "payment",
+      payment_method_types: ["card"],
+      customer_email: email,
       line_items: [
         {
           price_data: {
@@ -19,19 +46,22 @@ export async function POST(req: Request) {
               name: "Donación a Fundación Luz Dorada",
               description: "Gracias por tu apoyo 💛",
             },
-            unit_amount: amount,
+            unit_amount: amount, 
           },
           quantity: 1,
         },
       ],
-      customer_email: email || undefined,
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/donar?success=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/donar?canceled=true`,
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/donar?status=success`,
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/donar?status=cancel`,
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (err: any) {
-    console.error("Error en Stripe:", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err) {
+    console.error("Stripe checkout error:", err);
+    return NextResponse.json(
+      { error: "No se pudo crear la sesión de pago" },
+      { status: 500 }
+    );
   }
 }
+ */

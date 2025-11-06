@@ -21,12 +21,12 @@ export default function Home() {
         <p className="max-w-2xl mx-auto text-lg sm:text-xl">
             Trabajamos por el bienestar, la compañía y la dignidad de los adultos mayores.
           </p>
-          <Link
+        {/*   <Link
             href="/donar"
             className="inline-block mt-6 bg-amber-500 hover:bg-amber-400 text-white px-6 py-3 rounded-lg font-semibold"
           >
             Donar ahora
-          </Link>
+          </Link> */}
         </div>
       </div>
 
